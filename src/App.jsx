@@ -22,41 +22,31 @@ function App() {
     e.preventDefault();
     const { username, email, dob, phone } = formData;
 
-    // Username validation
-    if (!username) {
-      alert("Please fill out the Username field.");
+    // --- EMAIL VALIDATION ---
+    if (email && !email.includes("@")) {
+      alert("Invalid email");
       return;
     }
 
-    // Email validation
-    if (!email) {
-      alert("Please fill out the Email field.");
-      return;
-    }
-    if (!email.includes("@")) {
-      alert("Invalid email. Please check your email address.");
+    // --- PHONE VALIDATION ---
+    if (phone && !/^\d{10}$/.test(phone)) {
+      alert("Invalid phone number");
       return;
     }
 
-    // Date of Birth validation
-    if (!dob) {
-      alert("Please fill out the Date of Birth field.");
-      return;
-    }
-    const enteredDate = new Date(dob);
-    const today = new Date();
-    if (enteredDate > today) {
-      alert("Invalid date of birth. Please enter a past date.");
-      return;
+    // --- DOB VALIDATION ---
+    if (dob) {
+      const enteredDate = new Date(dob);
+      const today = new Date();
+      if (enteredDate > today) {
+        alert("Invalid date of birth");
+        return;
+      }
     }
 
-    // Phone validation
-    if (!phone) {
-      alert("Please fill out the Phone Number field.");
-      return;
-    }
-    if (!/^\d{10}$/.test(phone)) {
-      alert("Invalid phone number. Please enter a 10-digit phone number.");
+    // --- EMPTY FIELD VALIDATION ---
+    if (!username || !email || !dob || !phone) {
+      alert("Please fill out all the fields.");
       return;
     }
 
